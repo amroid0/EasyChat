@@ -40,7 +40,12 @@ android {
 }
 
 dependencies {
-
+    implementation (projects.feature.chat)
+    implementation (projects.feature.chatList)
+    implementation (projects.feature.home)
+    implementation(projects.common.framework)
+    implementation(projects.common.data)
+    implementation(projects.common.domain)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

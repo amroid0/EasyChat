@@ -18,7 +18,12 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "EasyChat"
 include(":app")
- 
+include(":feature:chatList")
+include(":feature:chat")
+include(":feature:home")
+include(":common:framework")
+include(":common:data")
+include(":common:domain")

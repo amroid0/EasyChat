@@ -30,13 +30,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.amroid.home.R
 import com.amroid.home.ui.model.Conversation
 import com.amroid.home.ui.model.generateTabList
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(newChatClick: () -> Unit) {
+fun HomeScreen(newChatClick: () -> Unit,onConversationListItemClicked :(String)->Unit) {
     var tabIndex by remember { mutableStateOf(0) }
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 3 })
     Scaffold(topBar = { TopAppBar(title = { Text(text = stringResource(R.string.home_title)) }, colors = TopAppBarDefaults.topAppBarColors(
@@ -82,7 +83,7 @@ fun HomeScreen(newChatClick: () -> Unit) {
           ) {
               when (it) {
                   0 -> {
-                     ConversationList(generateConversitionList())
+                     ConversationList(generateConversitionList(),onConversationListItemClicked)
                   }
                   1 -> {}
                   2 -> {}
@@ -103,3 +104,8 @@ fun generateConversitionList()= listOf(
     Conversation("2","https://i.pravatar.cc/150?u=2","Omar Sayed","Hello ","1/1/2025",0)
 
 )
+@Preview(showBackground = true)
+@Composable
+fun HomePreview() {
+    HomeScreen({ }, {})
+}

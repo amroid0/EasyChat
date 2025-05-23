@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SendBoxWidget() {
+fun SendBoxWidget(onSend:(String)->Unit) {
     Box(
         modifier = Modifier
             .padding(16.dp)
@@ -37,7 +37,9 @@ fun SendBoxWidget() {
                 .fillMaxWidth(.85f)
         )
         IconButton(
-            onClick = {}, modifier = Modifier
+            onClick ={
+                onSend(text)
+            }, modifier = Modifier
                 .height(60.dp)
                 .align(Alignment.CenterEnd)
         ) {

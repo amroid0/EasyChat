@@ -7,14 +7,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -24,7 +20,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.amroid.chat.ui.model.Message
 import com.amroid.chat.ui.model.MessageContent
 import com.amroid.chat.ui.widgets.MessageItem
@@ -32,11 +32,17 @@ import com.amroid.chat.ui.widgets.SendBoxWidget
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatScreen(chatId: String?, onBack: () -> Unit) {
+fun ChatScreen(viewModel: ChatViewModel = hiltViewModel(),
+               chatId: String?, onBack: () -> Unit) {
+    val messagesState by viewModel.messageList.collectAsState()
+    val chatInfoState by viewModel.chatInfoState.collectAsState()
+    LaunchedEffect(Unit) {
+        viewModel.loadChatInfo()
+    }
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Chat With") },
+                title = { Text(text = "Chat With ${chatInfoState.name}") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -50,12 +56,14 @@ fun ChatScreen(chatId: String?, onBack: () -> Unit) {
             )
         },
         bottomBar = {
-            SendBoxWidget()
+            SendBoxWidget{messge ->
+                viewModel.sendMessage(messge)
+            }
         }
 
 
     ) { contnetPadding ->
-        MessageList(Modifier.padding(contnetPadding), getFakeMessages())
+        MessageList(Modifier.padding(contnetPadding), messagesState)
     }
 }
 

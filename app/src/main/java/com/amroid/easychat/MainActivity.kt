@@ -11,7 +11,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.amroid.easychat.ui.navigation.AppNavigation
 import com.amroid.easychat.ui.theme.EasyChatTheme
 import com.amroid.home.ui.HomeScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

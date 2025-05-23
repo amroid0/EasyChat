@@ -39,7 +39,7 @@ fun NavGraphBuilder.addChat(navController: NavController) {
         })
     ) { navBack ->
         val chatId = navBack.arguments?.getString("id")
-        ChatScreen(chatId, onBack = {
+        ChatScreen(chatId = chatId, onBack = {
             navController.navigateUp()
         })
     }

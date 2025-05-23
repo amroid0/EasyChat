@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "46798231364",
+    "project_id": "easychat-799ee",
+    "storage_bucket": "easychat-799ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46798231364:android:d3e3023065ca22c995e911",
+        "android_client_info": {
+          "package_name": "com.amroid.easychat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnqcERdt8UWGl6o2Fy3TQN8wFo_bE2Io4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

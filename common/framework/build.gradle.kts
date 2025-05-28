@@ -58,4 +58,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.messaging.ktx)
+    implementation(libs.android.workmanager.ktx)
+    implementation(libs.android.worker.hilt)
+
 }

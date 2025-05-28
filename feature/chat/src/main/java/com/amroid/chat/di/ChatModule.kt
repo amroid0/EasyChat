@@ -4,6 +4,8 @@ import android.content.Context
 import com.amroid.chat.data.ApiHttpClient
 import com.amroid.chat.data.WebSocketClient
 import com.amroid.chat.data.datasources.FirebaseFireStoreProvider
+import com.amroid.chat.data.datasources.FirebaseStorageDataSource
+import com.amroid.chat.data.datasources.StorageDataSource
 import com.amroid.chat.data.mappers.MessageDataMapper
 import com.amroid.chat.data.mappers.MessageDomainMapper
 import com.amroid.chat.data.mappers.UserScopedMapper
@@ -14,6 +16,9 @@ import com.amroid.chat.data.repos.WebsocketMessageRepository
 import com.amroid.chat.domain.entities.MessageEntity
 import com.amroid.chat.domain.repos.ChatRoomRepository
 import com.amroid.chat.domain.repos.MessageRepository
+import com.amroid.chat.domain.usecases.BackUpUseCaseInvokerImp
+import com.amroid.framework.BackupUseCaseInvoker
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -64,7 +69,9 @@ abstract class ChatModule {
         fun provideFirebaseProvider(@ApplicationContext context: Context): FirebaseFireStoreProvider {
             return FirebaseFireStoreProvider(context)
         }
-
+        @Provides
+        @Singleton
+        fun provideFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
 
 
     }
@@ -84,4 +91,9 @@ abstract class ChatModule {
 
     @Binds
     abstract fun provideChatRoomRepository(chatRoomRepositoryImp: ChatRoomRepositoryImp): ChatRoomRepository
+
+    @Binds
+    abstract fun provideStorageDataSource(storageDataSource: FirebaseStorageDataSource): StorageDataSource
+    @Binds
+    abstract fun provideBackupInvoker(backUpUseCaseInvokerImp: BackUpUseCaseInvokerImp): BackupUseCaseInvoker
 }
